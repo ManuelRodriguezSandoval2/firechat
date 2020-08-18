@@ -1,18 +1,34 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, Injectable } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFireStorageModule } from 'angularfire2/storage';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 
+
+
+import { AngularFireModule } from 'angularfire2';
+import { environment } from '../environments/environment';
+import { ChatComponent } from './component/chat/chat.component';
+
+@Injectable({
+  providedIn: 'root'
+})
 @NgModule({
-  declarations: [
-    AppComponent
-  ],
+  declarations: [AppComponent, ChatComponent],
+  
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AngularFireModule.initializeApp(environment.firebase, 'my-app-name'), 
+    AngularFirestoreModule, 
+    AngularFireAuthModule, 
+    FormsModule,
+    AngularFireStorageModule 
   ],
-  providers: [],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
